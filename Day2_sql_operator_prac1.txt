@@ -1,0 +1,142 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 9.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
++--------------------+
+6 rows in set (0.12 sec)
+
+mysql> use bank
+Database changed
+mysql> show tables;
+Empty set (0.02 sec)
+
+mysql> create table student(id int,name varchar(20),course varchar(20),city varchar(20));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc student
+    -> ;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into student values(10,'deepak','bca','jaipur'),(20,'abhi','bsc','delhi'),(30,"ankit","Bcom","sikar"),(40,
+"Aadi","BBA","noida");
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
+|   20 | abhi   | bsc    | delhi  |
+|   30 | ankit  | Bcom   | sikar  |
+|   40 | Aadi   | BBA    | noida  |
++------+--------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select id,name from student;
++------+--------+
+| id   | name   |
++------+--------+
+|   10 | deepak |
+|   20 | abhi   |
+|   30 | ankit  |
+|   40 | Aadi   |
++------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *from student where id = 10;
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
++------+--------+--------+--------+
+1 row in set (0.01 sec)
+
+mysql> select *from student where id in(10,20);
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
+|   20 | abhi   | bsc    | delhi  |
++------+--------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *from student where id not in (20,30);
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
+|   40 | Aadi   | BBA    | noida  |
++------+--------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *from student where id between 10 and 30;
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
+|   20 | abhi   | bsc    | delhi  |
+|   30 | ankit  | Bcom   | sikar  |
++------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student  where name like "a%";
++------+-------+--------+-------+
+| id   | name  | course | city  |
++------+-------+--------+-------+
+|   20 | abhi  | bsc    | delhi |
+|   30 | ankit | Bcom   | sikar |
+|   40 | Aadi  | BBA    | noida |
++------+-------+--------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from student where name like "%i";
++------+------+--------+-------+
+| id   | name | course | city  |
++------+------+--------+-------+
+|   20 | abhi | bsc    | delhi |
+|   40 | Aadi | BBA    | noida |
++------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like "_a%";
++------+------+--------+-------+
+| id   | name | course | city  |
++------+------+--------+-------+
+|   40 | Aadi | BBA    | noida |
++------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select *from student where name like "%a_";
++------+--------+--------+--------+
+| id   | name   | course | city   |
++------+--------+--------+--------+
+|   10 | deepak | bca    | jaipur |
++------+--------+--------+--------+
+1 row in set (0.00 sec)
