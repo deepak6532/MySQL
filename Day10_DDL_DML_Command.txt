@@ -1,0 +1,295 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 55
+Server version: 9.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| prac               |
+| regex              |
+| regex2             |
+| sakila             |
+| sys                |
++--------------------+
+10 rows in set (0.02 sec)
+
+mysql> use prac;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_prac |
++----------------+
+| first          |
+| five           |
+| four           |
+| second         |
+| third          |
++----------------+
+5 rows in set (0.02 sec)
+
+mysql> create table demo(id int ,name varchar(20),address varchar(40));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc demo;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(40) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into demo values(101,"deepak","jaipur rajasthan"),(102,"ankit","Sikar "),(103,"Mahak","Bayana ");
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *form demo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form demo' at line 1
+mysql> select *from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  102 | ankit  | Sikar            |
+|  103 | Mahak  | Bayana           |
++------+--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> update demo set address="jaipur rajasthan" where id=103;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  102 | ankit  | Sikar            |
+|  103 | Mahak  | jaipur rajasthan |
++------+--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> update demo set name="gunjan" where id=102;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from demo
+    -> ;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  102 | gunjan | Sikar            |
+|  103 | Mahak  | jaipur rajasthan |
++------+--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> update demo set name="gunjan" ,address="delhi" where id=102;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  102 | gunjan | delhi            |
+|  103 | Mahak  | jaipur rajasthan |
++------+--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from demo where id=102;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  103 | Mahak  | jaipur rajasthan |
++------+--------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into demo(name,address) values("abhi","sw");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  103 | Mahak  | jaipur rajasthan |
+| NULL | abhi   | sw               |
++------+--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from demo where name="abhi";
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select *from demo;
++------+--------+------------------+
+| id   | name   | address          |
++------+--------+------------------+
+|  101 | deepak | jaipur rajasthan |
+|  103 | Mahak  | jaipur rajasthan |
++------+--------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table demo add column course varchar(20);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from demo;
++------+--------+------------------+--------+
+| id   | name   | address          | course |
++------+--------+------------------+--------+
+|  101 | deepak | jaipur rajasthan | NULL   |
+|  103 | Mahak  | jaipur rajasthan | NULL   |
++------+--------+------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update demo course ="Bca" where id=101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '="Bca" where id=101' at line 1
+mysql> update demo set course ="Bca" where id=101;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from demo;
++------+--------+------------------+--------+
+| id   | name   | address          | course |
++------+--------+------------------+--------+
+|  101 | deepak | jaipur rajasthan | Bca    |
+|  103 | Mahak  | jaipur rajasthan | NULL   |
++------+--------+------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update demo set course ="BA" where name="mahak";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from demo;
++------+--------+------------------+--------+
+| id   | name   | address          | course |
++------+--------+------------------+--------+
+|  101 | deepak | jaipur rajasthan | Bca    |
+|  103 | Mahak  | jaipur rajasthan | BA     |
++------+--------+------------------+--------+
+2 rows in set (0.00 sec)
+
+
+mysql> update demo set course="Ba" where id=103;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from demo;
++------+--------+------------------+--------+
+| id   | name   | address          | course |
++------+--------+------------------+--------+
+|  101 | deepak | jaipur rajasthan | Bca    |
+|  103 | Mahak  | jaipur rajasthan | Ba     |
++------+--------+------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> alter table demo drop column address;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from demo;
++------+--------+--------+
+| id   | name   | course |
++------+--------+--------+
+|  101 | deepak | Bca    |
+|  103 | Mahak  | Ba     |
++------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> alter table demo add primary key (id);
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc demo;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select *from demo;
++-----+--------+--------+
+| id  | name   | course |
++-----+--------+--------+
+| 101 | deepak | Bca    |
+| 103 | Mahak  | Ba     |
++-----+--------+--------+
+2 rows in set (0.01 sec)
+
+
+mysql> alter table demo modify course varchar(50);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc demo;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> rename table demo to ddl_dml;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select *from ddl_dml;
++-----+--------+--------+
+| id  | name   | course |
++-----+--------+--------+
+| 101 | deepak | Bca    |
+| 103 | Mahak  | Ba     |
++-----+--------+--------+
+2 rows in set (0.01 sec)
+
+
+mysql> create table test(id int,name varchar(30));     
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into test values(10,"Ankit"),(20,"yash"),(30,"jay"),(40,"rakesh");
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select *from test;
++------+--------+
+| id   | name   |
++------+--------+
+|   10 | Ankit  |
+|   20 | yash   |
+|   30 | jay    |
+|   40 | rakesh |
++------+--------+
+4 rows in set (0.00 sec)
+
+mysql> drop table test;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from test;
+ERROR 1146 (42S02): Table 'prac.test' doesn't exist
